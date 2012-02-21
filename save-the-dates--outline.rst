@@ -181,6 +181,8 @@ plone.app.event - was fehlt noch
 % TODO: Testabdeckung
 - Testabdeckung XXX %
 
+- Migrationen
+
 - Finalisierung Index-Benchmarks
 
 - Finalisierung plone.forminput.datetime
