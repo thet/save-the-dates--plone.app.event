@@ -1,7 +1,8 @@
 Save the Dates - Das Kalenderframework plone.app.event
 ======================================================
 
-Johannes Raggam, BlueDynamics Alliance
+Johannes Raggam, programmatic.pro
+BlueDynamics Alliance
 Plonekonferenz, München, 2012
 
 
@@ -20,16 +21,31 @@ Who am I
 - 2012: Geplanter g24.at Relaunch auf Basis des Plone Frameworks
 
 
+Über diesen Talk
+----------------
+
+Termin- und Kalenderimplementierung in Plone.
+
+Derzeit: Products.Archetypes' ATEvent. Veraltet.
+
+Zukunft: plone.app.event.
+
+* Geschichte.
+* Aktuelle Situation.
+* Plone.app.Event.
+* Zukunft von plone.app.event.
+
+
 Plone ATEvent - die aktuelle Situation
 --------------------------------------
-% TODO: Bild ATEvent Form
 
 - Veraltetes Date/Time Widget
 - Keine Ganztagestermine
-- Keine Wiederholungs/Recurring Regeln
+- Keine Terminwiederholungen
+- Keine Zeitzonen
 - Ungenügende iCalendar Unterstützung
 - Veraltete Infrastruktur: CMFCalendar, PloneTestCase.
-- Verwobene Codebasis:
+- Verwobene Abhängigkeiten:
     Date/Time Widget und Tests in CMFPlone
     Portlets in plone.app.Portlets
     CMFCalendar Dependency
@@ -61,25 +77,6 @@ Erweiterungen und Verbesserungen
 - Infrastruktur: plone.app.eventindex, bda.calendar.base, Products.DateRangeInRangeIndex, Products.DateRecurringIndex, bda.intellidatetime, collective.weighteddaterangeindex, dateable.chronos, dateable.kalends, experimental.daterangeindexoptimisations, experimental.ulocalized_time
 
 
-plone.app.event - bringing it all together
-------------------------------------------
-
-plone.app.event ersetzt ATEvent und bietet diese Features:
-
-- Alle Event- und Kalenderbezogenen Funktionalitäten in einem Pyhonpacket.
-- Möglichst geringe Abhängigkeiten von Plone auf plone.app.event. Möglichkeit
-  der Deinstallation.
-- Aufsplittung generischer Funktionalitäten in seperate Packages.
-- Archetypes Typ und Dexterity Behaviors.
-- Gewährleistung der Funktionalität auch ohne Archetypes.
-- iCalendar Standardkonformität.
-- Modernisiertes Date/Time Widget.
-- Unterstützung von Ganztagesterminen.
-- Recurring Events.
-- Zeitzonen Unterstützung.
-- Modernisierung der Infrastruktur (plone.app.testing, plone.app.registry, ...)
-
-
 Der lange Weg zu plone.app.event
 --------------------------------
 
@@ -97,30 +94,85 @@ Der lange Weg zu plone.app.event
 * Artsprint 2012: ...
 
 
-plone.app.event - der derzeitige Status
----------------------------------------
+plone.app.event - bringing it all together
+------------------------------------------
 
-% TODO Screenshots von Forms und Funktionalitäten, Screencasts.
+% TODO: screenshots
 
-- Generische Funktionalitäten in seperaten Packages
+Archetypes und Dexterity Unterstützung
+
+    Archetypes Inhaltstyp
+    Dexterity Behaviors:
+        Basistermin, Termin mit Recurrence, Termin mit Location,
+        Termin mit Teilnehmer, Termin mit Kontaktadresse
+    Dexterity Beispielstyp
+        Generic Setup Konfiguration auf Basis der Behaviors
+
+    Views, Search API, Catalog unterstützen beide Typen
+
+Kapselung und Unabhängigkeit
+
+    Event- und Kalenderbezogene Funktionalitäten in dedizierten Paketen:
+        Dropped:
+            Products.CMFPlone.CalendarTool XXX
+            plone.app.controlpanel.event XXX
+            Products.CMFPlone. datewidget, eventview
+            Products.ATConentTypes: event type, ics_view
+        Used:
+            plone.app.event: dx, at, icalendar, configlet XXX, views
+            Products.DateRecurringIndex / plone.app.eventindex
+            plone.formwidget.recurrenceinput
+            plone.formwidget.datetime
+            plone.event: tools, recurrence calculations
+            icalendar
+            python-dateutil: rfc2445 recurrence
+
+    Möglichst geringe Abhängigkeiten auf plone.app.event (Make it deinstallable)
+
+    Keine fixe Abhängigkeit auf Archetypes sowie Dexterity. Future proof.
+
   % Konzept geht auf: plone.event wird von anderen Implementierungen benutzt,
   % Products.DateRecurringIndex ist austauschbar mit plone.app.eventindex,
   % icalendar wird abseits der Plone Welt genutzt, jquery.recurrenceinput ist
   % für jedes Webprojekt nutzbar.
 
-% ATEvent & Dexterity Behaviors
+Standards Compliance
 
-% whole day events
+    icalendar Standard, RFC5545: Recurrence, ical Export.
+    Weitere mögliche Standards:
+        CalDAV, vCard, CardDAV
 
-% datetime widget
+Modernisiertes Date/Time Widget
 
-% recurring events
+    jquerytools Dateinput
+    HTML5 Kompatibel
 
-% Timezone support
+Unterstützung von Ganztagesterminen.
+    
+    Start: 0:00
+    Ende: 23:59:59
 
-% DateRecurringIndex / plone.app.eventindex
+Recurring Events
 
-% Neues calendarportlet
+    icalendar Konforme Recurring Unterstützung
+    Basierend auf python-dateutil
+    Drop-In Replacement des Index: Products.DateRecurringIndex
+    Recurrence Widget
+
+Zeitzonen Unterstützung
+
+    Integration von pytz.
+    Olson Database - de facto Standard.
+
+Kalenderportlet
+    
+    Unterstützung von Dexterity und Archetypes basierten Inhalten
+    Recurrence Unterstützung
+
+Modernisierung der Infrastruktur
+    
+    plone.app.testing
+    plone.app.registry
 
 
 plone.app.event - was fehlt noch
@@ -129,7 +181,11 @@ plone.app.event - was fehlt noch
 % TODO: Testabdeckung
 - Testabdeckung XXX %
 
+- Finalisierung Index-Benchmarks
+
 - Finalisierung plone.forminput.datetime
+
+- Weniger dringende TODOs.
 
 - Dokumentation
 
@@ -162,6 +218,7 @@ plone.app.event - die API
 
 plone.app.event - the Future
 ----------------------------
+
 - Abweichende Beginn-/Endzeiten und Texte bei Recurring Events
 - Weitere iCalendar Standard Event Typen: Journal, Todo, Alarm
 - iCalendar import
@@ -174,13 +231,15 @@ Try it!
 
 $ git clone git@github.com:collective/plone.app.event.git
 
+% TODO: how to install
+
 READ: README.txt
 
 
 Help out!
 ---------
 
-Fork me. Submit Pull requests.
+Fork me. Submit Pull requests. Sponsor a sprint.
 
 Tnx!
 ----
