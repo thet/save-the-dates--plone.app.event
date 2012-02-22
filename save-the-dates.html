@@ -91,40 +91,41 @@
 
 <section>
 	<header class="slide">
-		<h1>Aktuell: ATContentTypes / CMFCalendar</h1>
+		<h1>Aktuelle Situation</h1>
 	</header>
 
 	<section class="slide">
     <h2>>>> from Products.ATContentTypes.content import ATEvent</h2>
     <p>ATEvent: Termintyp in Plone
       <ul>
-        <li>2004, Version 0.2.0, <a href="https://github.com/plone/Products.ATContentTypes/blob/2e530f69f28b617bc57cbf47e3fe47e8a740e0a6/Products/ATContentTypes/types/ATEvent.py">ATEvent</a></li>
+        <li><a href="https://github.com/plone/Products.ATContentTypes/blob/2e530f69f28b617bc57cbf47e3fe47e8a740e0a6/Products/ATContentTypes/types/ATEvent.py">ATEvent</a> seit Version 0.2.0, 2004.</li>
         <li>Mittlerweile überholt</li>
-        <ul>
-          <li>Überholtes Date/Time Widget</li>
-          <li>Keine Ganztagestermine</li>
-          <li>Keine Terminwiederholungen</li>
-          <li>Keine Zeitzonen</li>
-          <li>Mangelhafte icalendar Unterstützung</li>
-          <li>Veraltete Infrastruktur</li>
-          <li>Verwobene Abhängigkeiten</li>
-        </ul>
       </ul>
     </p>
 	</section>
+ 	<section class="slide">
+    <h2>>>> from Products.ATContentTypes.content import ATEvent</h2>
+    <ul>
+      <li>Überholtes Date/Time Widget</li>
+      <li>Keine Ganztagestermine</li>
+      <li>Keine Terminwiederholungen</li>
+      <li>Keine Zeitzonen</li>
+      <li>Mangelhafte icalendar Unterstützung</li>
+      <li>Veraltete Infrastruktur</li>
+      <li>Verwobene Abhängigkeiten</li>
+    </ul>
+
 
   <section class="slide">
     <h2>>>> from Products.CMFCalendar import Event</h2>
-    <p>CMFCalendar: Kalenderframework in Zope
-      <li><a href="http://svn.zope.org/CMF/tags/CMF-1_1-release/CMFCalendar/Event.py?rev=37167&view=log">CMFCalendar.Event</a> von Mai 2001</li>
-      <li>Später: Kalender Infrastruktur</li>
-      <ul>
-        <li>CalendarTool (CalendarTypes, Start of Week, Use Session to store Last selected date, ...)</li>
-        <li>Views</li>
-        <li>Locales</li>
-      </ul>
-      <p>Kalender-Infrastruktur ist gut, aber dieses Paket wird obsolet</p>
-    </p>
+    <p>CMFCalendar</p>
+    <ul>
+      <li>Zope Kalenderframework</li>
+      <li><a href="http://svn.zope.org/CMF/tags/CMF-1_1-release/CMFCalendar/Event.py?rev=37167&view=log">Seit Mai 2001.</a></li>
+      <li>CalendarTool, Views, Locales, Event Typ</li>
+        <!-- (CalendarTypes, Start of Week, Use Session to store Last selected date, ...) -->
+      <li>Wenig genutzt.</li>
+    </ul>
   </section>
   <section class="slide">
     <!-- Pause, Sum up -->
