@@ -34,7 +34,7 @@
 	
 	<section class="slide">
 		<h2>$ whoami</h2>
-    <p>Johannes Raggam 
+    <p>Johannes Raggam, thet.
       <ul>
         <li><a href="http://programmatic.pro">programmatic.pro</a></li>
         <li>Graz, Österreich</li>
@@ -46,7 +46,7 @@
     </p>
 	</section>
 	<section class="slide">
-		<h2>$ id g24</h2>
+		<h2>$ id g24.at</h2>
     <p>2002: Gründung <a href="http://g24.at/">g24.at</a>
       <ul>
         <li>Online Community für Graz</li>
@@ -62,9 +62,9 @@
     <img src="img/g24-cal.png" alt="" />
    </section>
 	<section class="slide">
-		<h2>$ id g24</h2>
+		<h2>$ id g24.at</h2>
     <p>
-      2012: Geplanter g24.at Relaunch auf Basis des Plone Frameworks`
+      2012: Geplanter g24.at Relaunch auf Basis des Plone Frameworks
     </p>
     <ul>
       <li>plone.app.event</li>
@@ -86,6 +86,144 @@
    </section>
 
  </section>
+
+ <!-- net zuviel zeit verplempern... -->
+
+<section>
+	<header class="slide">
+		<h1>Aktell: ATContentTypes / CMFCalendar</h1>
+	</header>
+	
+	<section class="slide">
+    <h2>>>> from Products.ATContentTypes.content import ATEvent</h2>
+    <p>ATEvent: Termintyp in Plone
+      <ul>
+        <li>2004, Version 0.2.0, <a href="https://github.com/plone/Products.ATContentTypes/blob/2e530f69f28b617bc57cbf47e3fe47e8a740e0a6/Products/ATContentTypes/types/ATEvent.py">ATEvent</a></li>
+        <li>Mittlerweile überholt</li>
+        <ul>
+          <li>Überholtes Date/Time Widget</li>
+          <li>Keine Ganztagestermine</li>
+          <li>Keine Terminwiederholungen</li>
+          <li>Keine Zeitzonen</li>
+          <li>Mangelhafte icalendar Unterstützung</li>
+          <li>Veraltete Infrastruktur</li>
+          <li>Verwobene Abhängigkeiten</li>
+        </ul>
+      </ul>
+    </p>
+	</section>
+   
+  <section class="slide">
+    <h2>>>> from Products.CMFCalendar import Event</h2>
+    <p>CMFCalendar: Kalenderframework in Zope
+      <li><a href="http://svn.zope.org/CMF/tags/CMF-1_1-release/CMFCalendar/Event.py?rev=37167&view=log">CMFCalendar.Event</a> von Mai 2001</li>
+      <li>Später: Kalender Infrastruktur</li>
+      <ul>
+        <li>CalendarTool (CalendarTypes, Start of Week, Use Session to store Last selected date, ...)</li>
+        <li>Views</li>
+        <li>Locales</li>
+      </ul>
+      <p>Kalender-Infrastruktur ist gut, aber dieses Paket wird obsolet</p>
+    </p>
+  </section>
+  <section class="slide">
+    <!-- Pause, Sum up -->
+  </section>
+
+</section>
+
+<section>
+  <header class="slide">
+    <h1>Neu: plone.app.event<h1>
+	</header>
+
+  <header class="slide">
+    <h1>What's that?<h1>
+	</header>
+		
+	<section class="slide">
+    <h2>>>> from plone.app.event.at import content<br />
+      >>> from plone.app.event.dx import behaviors</h2>
+    <p>Archetypes und Dexterity Unterstützung
+      <ul>
+        <li>Archetypes Inhaltstyp</li>
+        <li>Dexterity Behaviors</li>
+        <ul>
+          <li>Basistermin, Termin mit Recurrence, Termin mit Location,
+        Termin mit Teilnehmer, Termin mit Kontaktadresse</li>
+        </ul>
+        <li>Dexterity Typ auf Basis von Behaviors</li>
+      </ul>
+    </p>
+  </section>
+
+	<section class="slide">
+    <h2>>>> import plone.app.event</h2>
+
+    <p>Kapselung und Unabhängigkeit <br />
+      Dedizierte Pakete für Event bezogene Funktionalitäten
+      <ul>
+        <li>plone.app.event: AT-Typ, DX-Behaviors, Event Controlpanel, Portlets, icalendar Export, Tools (Search, Timezone)</li>
+        <li>Dropped: CMFCalendar, Products.CMFPlone.CalendarTool</li>
+        <li>p.a.event.browser.controlpanel statt p.a.controlpanel.calendar</li>
+        <li></li>
+      </ul>
+    </p>
+  </section>
+
+
+
+
+    Event- und Kalenderbezogene Funktionalitäten in dedizierten Paketen:
+        Dropped:
+            Products.CMFPlone.CalendarTool XXX
+            plone.app.controlpanel.event XXX
+            Products.CMFPlone. datewidget, eventview
+            Products.ATConentTypes: event type, ics_view
+        Used:
+            plone.app.event: dx, at, icalendar, configlet XXX, views
+            Products.DateRecurringIndex / plone.app.eventindex
+            plone.formwidget.recurrenceinput
+            plone.formwidget.datetime
+            plone.event: tools, recurrence calculations
+            icalendar
+            python-dateutil: rfc2445 recurrence
+
+    Möglichst geringe Abhängigkeiten auf plone.app.event (Make it deinstallable)
+
+    Keine fixe Abhängigkeit auf Archetypes sowie Dexterity. Future proof.
+
+  % Konzept geht auf: plone.event wird von anderen Implementierungen benutzt,
+  % Products.DateRecurringIndex ist austauschbar mit plone.app.eventindex,
+  % icalendar wird abseits der Plone Welt genutzt, jquery.recurrenceinput ist
+  % für jedes Webprojekt nutzbar.
+
+
+
+</section>
+
+
+
+
+
+
+
+<section>
+	<header class="slide">
+		<h1></h1>
+	</header>
+	
+	<section class="slide">
+		<h2></h2>
+    <p>
+      <ul>
+        <li></li>
+      </ul>
+    </p>
+	</section>
+</section>
+
+
 
 <footer class="slide">
 	<h2>Thank you!</h2>
