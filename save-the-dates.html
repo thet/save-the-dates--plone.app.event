@@ -21,7 +21,7 @@
 <body data-duration="45">
 
 <header id="intro" class="slide">
-  <h2>Save The Dates</h2> 
+  <h2>Save The Dates</h2>
   <p>Das Kalenderframework plone.app.event</p>
   <p>Plone Konferenz 2012, München</p>
   <p class="attribution">Johannes Raggam, BlueDynamics Alliance</p>
@@ -31,7 +31,7 @@
 	<header class="slide">
 		<h1>Who am I?</h1>
 	</header>
-	
+
 	<section class="slide">
 		<h2>$ whoami</h2>
     <p>Johannes Raggam, thet.
@@ -91,9 +91,9 @@
 
 <section>
 	<header class="slide">
-		<h1>Aktell: ATContentTypes / CMFCalendar</h1>
+		<h1>Aktuell: ATContentTypes / CMFCalendar</h1>
 	</header>
-	
+
 	<section class="slide">
     <h2>>>> from Products.ATContentTypes.content import ATEvent</h2>
     <p>ATEvent: Termintyp in Plone
@@ -112,7 +112,7 @@
       </ul>
     </p>
 	</section>
-   
+
   <section class="slide">
     <h2>>>> from Products.CMFCalendar import Event</h2>
     <p>CMFCalendar: Kalenderframework in Zope
@@ -138,13 +138,13 @@
 	</header>
 
   <header class="slide">
-    <h1>What's that?<h1>
+    <h1>Archetypes und Dexterity Unterstützung<h1>
 	</header>
-		
+
 	<section class="slide">
     <h2>>>> from plone.app.event.at import content<br />
       >>> from plone.app.event.dx import behaviors</h2>
-    <p>Archetypes und Dexterity Unterstützung
+    <p>
       <ul>
         <li>Archetypes Inhaltstyp</li>
         <li>Dexterity Behaviors</li>
@@ -155,79 +155,184 @@
         <li>Dexterity Typ auf Basis von Behaviors</li>
       </ul>
     </p>
-  </section>
+ </section>
+
+  <header class="slide">
+    <h1>Kapselung und Unabhängigkeit<h1>
+	</header>
 
 	<section class="slide">
     <h2>>>> import plone.app.event</h2>
 
-    <p>Kapselung und Unabhängigkeit <br />
-      Dedizierte Pakete für Event bezogene Funktionalitäten
+    <h3>Dedizierte Pakete für Event bezogene Funktionalitäten</h3>
+    <p>plone.app.event,
+      Products.DateRecurringIndex, plone.event, plone.formwidget.datetime,
+      plone.formwidget.recurrence, icalendar, jquery.recurrenceinput.js,
+      python-dateutil, pytz </p>
+
+    <!--
+      <p class="presenter-notes">
       <ul>
-        <li>plone.app.event: AT-Typ, DX-Behaviors, Event Controlpanel, Portlets, icalendar Export, Tools (Search, Timezone)</li>
-        <li>Dropped: CMFCalendar, Products.CMFPlone.CalendarTool</li>
-        <li>p.a.event.browser.controlpanel statt p.a.controlpanel.calendar</li>
-        <li></li>
+        <li>plone.app.event: AT-Typ, DX-Behaviors, Event Controlpanel, Views, Portlets, icalendar Export, Tools (Search, Timezone)</li>
+        <li>Products.DateRecurringIndex: Index mit Recurrence Support. Drop in Replacement für DateIndex. Ein Index Eintrag pro Occurrence</li>
+        <li>plone.event: recurrence calculations, datetime tools.</li>
+        <li>plone.formwidget.datetime: Datetime widget.</li>
+        <li>plone.formwidget.recurrence: Recurrence Widget.</li>
+        <li>icalendar: icalendar RFC5545 compatible file parser</li>
+        <li>jquery.recurrenceinput.js: JQuery Recurrence Plugin</li>
       </ul>
+      -->
     </p>
   </section>
 
+  <section class="slide">
+    <h2>>>> from datetime import datetime</h2>
+    <h2>>>> from plone.event.util import pydt</h2>
 
+    <ul>
+      <li>python datetime statt DateTime.</li>
+       <li>pytz timezones, Olson Database</li>
+    </ul>
 
+  
 
-    Event- und Kalenderbezogene Funktionalitäten in dedizierten Paketen:
-        Dropped:
-            Products.CMFPlone.CalendarTool XXX
-            plone.app.controlpanel.event XXX
-            Products.CMFPlone. datewidget, eventview
-            Products.ATConentTypes: event type, ics_view
-        Used:
-            plone.app.event: dx, at, icalendar, configlet XXX, views
-            Products.DateRecurringIndex / plone.app.eventindex
-            plone.formwidget.recurrenceinput
-            plone.formwidget.datetime
-            plone.event: tools, recurrence calculations
-            icalendar
-            python-dateutil: rfc2445 recurrence
+  </section>
 
-    Möglichst geringe Abhängigkeiten auf plone.app.event (Make it deinstallable)
+ 	<section class="slide">
+    <h2>>>> import Products.ATConentTypes.content.event as BBB</h2>
 
-    Keine fixe Abhängigkeit auf Archetypes sowie Dexterity. Future proof.
+    <ul>
+     <li>Keine fixe Abhängigkeit auf Archetypes sowie Dexterity.</li>
 
+    <li>Deinstallierbar: Geringe Abhängigkeiten anderer Pakete auf plone.app.event.</li><!-- ATConentTypes, plone.app.controlpanel, plone.app.portets -->
+
+    <li>Reduzierung von Legacy Abhängigkeiten: CMFCalendar, CalendarTool</li>
+
+    </ul>
+  
+  </section>
+
+  <!--
   % Konzept geht auf: plone.event wird von anderen Implementierungen benutzt,
   % Products.DateRecurringIndex ist austauschbar mit plone.app.eventindex,
   % icalendar wird abseits der Plone Welt genutzt, jquery.recurrenceinput ist
   % für jedes Webprojekt nutzbar.
+  -->
 
 
+  <header class="slide">
+    <h1>Weitere Eigenschaften<h1>
+	</header>
+
+	<section class="slide">
+    <h2>>>> dir(plone.app.event)</h2>
+      <ul>
+        <li>Standards Compliance</li>
+        <li>Modernisiertes Date/Time Widget</li>
+        <li>Unterstützung von Ganztagesterminen</li>
+      </ul>
+	</section>
+	<section class="slide">
+    <h2>>>> dir(plone.app.event)</h2>
+      <ul>
+        <li>Recurring Events</li>
+        <li>Zeitzonen Unterstützung</li>
+      </ul>
+	</section>
+	<section class="slide">
+    <h2>>>> dir(plone.app.event)</h2>
+      <ul>
+       <li>Kalenderportlet</li>
+       <li>Modernisierung der Infrastruktur</li>
+      </ul>
+	</section>
+
+<!--
+Standards Compliance: icalendar Standard, RFC5545: Recurrence, ical Export. | Weitere mögliche Standards: CalDAV, vCard, CardDAV
+Modernisiertes Date/Time Widget: jquerytools Dateinput | HTML5 Kompatibel
+Unterstützung von Ganztagesterminen: Start: 0:00 | Ende: 23:59:59
+Recurring Events: icalendar Konforme Recurring Unterstützung | Basierend auf python-dateutil | Drop-In Replacement des Index: Products.DateRecurringIndex | Recurrence Widget
+Zeitzonen Unterstützung: Integration von pytz. | Olson Database - de facto Standard.
+Kalenderportlet: Unterstützung von Dexterity und Archetypes basierten Inhalten | Recurrence Unterstützung
+Modernisierung der Infrastruktur: plone.app.testing | plone.app.registry
+-->
 
 </section>
 
-
-
-
-
-
-
 <section>
 	<header class="slide">
-		<h1></h1>
+		<h1>Was fehlt noch?</h1>
 	</header>
-	
+
 	<section class="slide">
-		<h2></h2>
-    <p>
+    <h2>$ grep -ri TODO</h2>
       <ul>
-        <li></li>
+        <li>Tests.</li>
+        <li>Migrationspfad.</li>
+        <li>Index Benchmark Analyse.</li>
+        <li>Date/Time Widget.</li>
+        <li>Dokumentation.</li>
+        <li>Submit for review.</li>
       </ul>
-    </p>
+<!--
+Tests.- Testabdeckung XXX %
+- Migrationen
+- Finalisierung Index-Benchmarks
+- Finalisierung plone.forminput.datetime
+- Weniger dringende TODOs.
+- Dokumentation
+- PLIP Submission.
+-->
+
 	</section>
 </section>
 
 
 
+<section>
+	<header class="slide">
+		<h1>Ausblick</h1>
+	</header>
+
+	<section class="slide">
+    <h2>>>> import future</h2>
+      <ul>
+<li>Abweichende Beginn-/Endzeiten und Texte bei Recurring Events</li>
+<li>Weitere iCalendar Standard Event Typen: Journal, Todo, Alarm</li>
+<li>iCalendar import</li>
+<li>CalDAV schnittstelle</li>
+<li>CardDAV/vCard schnittstelle</li>
+      </ul>
+	</section>
+</section>
+
+
+<section>
+	<header class="slide">
+		<h1>Try it!</h1>
+	</header>
+
+	<section class="slide">
+    <h2>$ git clone git@github.com:collective/plone.app.event.git</h2>
+    <h2>$ firefox http://github.com/collective/plone.app.event</h2>
+    <p>Read the README.</p>
+	</section>
+</section>
+
+<section>
+	<header class="slide">
+		<h1>Help out!</h1>
+	</header>
+
+	<section class="slide">
+    <h2>$ git push</h2>
+    <p>Fork me. Submit Pull requests. Sponsor a sprint.</p>
+	</section>
+</section>
+
+
 <footer class="slide">
-	<h2>Thank you!</h2>
-	<p>Closing remarks</p>
+	<h2>Tnx!</h2>
 </footer>
 
 <script src="CSSS/slideshow.js"></script>
@@ -241,7 +346,7 @@
 <script src="plugins/css-controls.js"></script>
 -->
 <script>var slideshow = new SlideShow();</script>
-	
+
 </body>
 </html>
 
