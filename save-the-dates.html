@@ -21,9 +21,9 @@
 <body data-duration="45">
 
 <header id="intro" class="slide">
-  <h2>Save The Dates</h2>
   <p>Das Kalenderframework plone.app.event</p>
   <p>Plone Konferenz 2012, München</p>
+  <h1>Save The Dates</h1>
   <p class="attribution">Johannes Raggam, BlueDynamics Alliance</p>
 </header>
 
@@ -34,7 +34,7 @@
 
 	<section class="slide">
 		<h2>$ whoami</h2>
-    <p>Johannes Raggam, thet.
+    <p>Johannes Raggam, thet.</p>
       <ul>
         <li><a href="http://programmatic.pro">programmatic.pro</a></li>
         <li>Graz, Österreich</li>
@@ -70,7 +70,7 @@
       <li>plone.app.event</li>
       <li>Dexterity Types</li>
       <li>Dynamische Schemas</li>
-      <li>Sync mit Kulturserver Graz (Via CalDAV?)</li>
+      <li>Sync mit Kulturserver Graz (via CalDAV?)</li>
     </ul>
   </section>
  	<section class="slide fullimg">
@@ -106,13 +106,13 @@
  	<section class="slide">
     <h2>>>> from Products.ATContentTypes.content import ATEvent</h2>
     <ul>
-      <li>Überholtes Date/Time Widget</li>
-      <li>Keine Ganztagestermine</li>
-      <li>Keine Terminwiederholungen</li>
-      <li>Keine Zeitzonen</li>
-      <li>Mangelhafte icalendar Unterstützung</li>
-      <li>Veraltete Infrastruktur</li>
-      <li>Verwobene Abhängigkeiten</li>
+      <li class="delayed">Überholtes Date/Time Widget</li>
+      <li class="delayed">Keine Ganztagestermine</li>
+      <li class="delayed">Keine Terminwiederholungen</li>
+      <li class="delayed">Keine Zeitzonen</li>
+      <li class="delayed">Mangelhafte icalendar Unterstützung</li>
+      <li class="delayed">Veraltete Infrastruktur</li>
+      <li class="delayed">Verwobene Abhängigkeiten</li>
     </ul>
 
 
@@ -135,6 +135,21 @@
     <h1>Neu: plone.app.event<h1>
 	</header>
 
+  <section class="slide">
+    <h2>>>> dir(plone.app.event)</h2>
+    <ul>
+      <li>Dexterity und Archetypes</li>
+      <li>Kapselung und Unabhängigkeit</li>
+      <li>Standards Compliance</li>
+      <li>Modernisiertes Date/Time Widget</li>
+      <li>Unterstützung von Ganztagesterminen</li>
+      <li>Recurring Events</li>
+      <li>Zeitzonen Unterstützung</li>
+      <li>Neues Kalenderportlet</li>
+      <li>Modernisierung der Infrastruktur</li>
+    </ul>
+  </section>
+
   <header class="slide">
     <h1>Dexterity und Archetypes<h1>
 	</header>
@@ -144,13 +159,14 @@
       >>> from plone.app.event.dx import behaviors</h2>
     <p>
       <ul>
-        <li>Archetypes Inhaltstyp</li>
-        <li>Dexterity Behaviors</li>
-        <ul>
-          <li>Basistermin, Termin mit Recurrence, Termin mit Location,
-        Termin mit Teilnehmer, Termin mit Kontaktadresse</li>
-        </ul>
-        <li>Dexterity Typ auf Basis von Behaviors</li>
+        <li class="delayed">Archetypes Inhaltstyp</li>
+        <li class="delayed">Dexterity Behaviors
+          <ul>
+            <li class="delayed">Basistermin, Termin mit Recurrence, Termin mit Location,
+                Termin mit Teilnehmer, Termin mit Kontaktadresse</li>
+            <li class="delayed">Dexterity Typ auf Basis von Behaviors</li>
+          </ul>
+        </li>
       </ul>
     </p>
  </section>
@@ -159,14 +175,51 @@
     <h1>Kapselung und Unabhängigkeit<h1>
 	</header>
 
+ 	<section class="slide">
+    <h2>>>> import Products.ATConentTypes.content.event as BBB</h2>
+    <ul>
+     <li class="delayed">Optional: Archetypes und Dexterity.</li>
+     <li class="delayed">Deinstallierbar.
+      <ul class="inline">
+        <li class="delayed inline">Geringe Abhängigkeiten auf plone.app.event.</li>
+      </ul>
+    </li>
+     <li class="delayed">Weniger Legacy Abhängigkeiten.</li>
+     <li class="delayed">Weniger Zope DateTime.</li>
+   </ul>
+
+   <!-- 
+     Keine fixe Abhängigkeit auf Archetypes sowie Dexterity.
+     Deinstallierbar: Geringe Abhängigkeiten anderer Pakete auf plone.app.event.- ATConentTypes, plone.app.controlpanel, plone.app.portets
+     Reduzierung von Legacy Abhängigkeiten.
+     Vermeidung von Zope DateTime.
+   -->
+
+  </section>
+
 	<section class="slide">
     <h2>>>> import plone.app.event</h2>
 
-    <h3>Dedizierte Pakete für Event bezogene Funktionalitäten</h3>
-    <p>plone.app.event,
-      Products.DateRecurringIndex, plone.event, plone.formwidget.datetime,
-      plone.formwidget.recurrence, icalendar, jquery.recurrenceinput.js,
-      python-dateutil, pytz </p>
+    <p class="delayed">Aktuell:
+    <ul class="strikethrough">
+      <li class="delayed inline">ATContentTypes,</li>
+      <li class="delayed inline">CMFPlone (CalendarTool),</li>
+      <li class="delayed inline">CMFCalendar.</li>
+    </ul>
+
+    <p class="delayed">Dedizierte Pakete für Event bezogene Funktionalitäten</>
+    <ul>
+      <li class="delayed inline">plone.app.event,</li>
+      <li class="delayed inline">plone.event,</li>
+      <li class="delayed inline">Products.DateRecurringIndex,</li>
+      <li class="delayed inline">plone.formwidget.datetime,</li>
+      <li class="delayed inline">plone.formwidget.recurrence,</li>
+      <li class="delayed inline">jquery.recurrenceinput.js,</li>
+      <li class="delayed inline">icalendar,</li>
+      <li class="delayed inline">python-dateutil,</li>
+      <li class="delayed inline">pytz.</li>
+    </ul>
+    </p>
 
     <!--
       <p class="presenter-notes">
@@ -180,44 +233,16 @@
         <li>jquery.recurrenceinput.js: JQuery Recurrence Plugin</li>
       </ul>
       -->
-    </p>
-  </section>
-
-  <section class="slide">
-    <h2>>>> from datetime import datetime</h2>
-    <h2>>>> from plone.event.util import pydt</h2>
-
-    <ul>
-      <li>python datetime statt DateTime.</li>
-       <li>pytz timezones, Olson Database</li>
-    </ul>
-
-  
-
-  </section>
-
- 	<section class="slide">
-    <h2>>>> import Products.ATConentTypes.content.event as BBB</h2>
-
-    <ul>
-     <li>Keine fixe Abhängigkeit auf Archetypes sowie Dexterity.</li>
-
-    <li>Deinstallierbar: Geringe Abhängigkeiten anderer Pakete auf plone.app.event.</li><!-- ATConentTypes, plone.app.controlpanel, plone.app.portets -->
-
-    <li>Reduzierung von Legacy Abhängigkeiten: CMFCalendar, CalendarTool</li>
-
-    </ul>
-  
-  </section>
-
-  <!--
+ <!--
   % Konzept geht auf: plone.event wird von anderen Implementierungen benutzt,
   % Products.DateRecurringIndex ist austauschbar mit plone.app.eventindex,
   % icalendar wird abseits der Plone Welt genutzt, jquery.recurrenceinput ist
   % für jedes Webprojekt nutzbar.
   -->
 
+  </section>
 
+ 
   <header class="slide">
     <h1>Weitere Eigenschaften<h1>
 	</header>
@@ -240,7 +265,7 @@
 	<section class="slide">
     <h2>>>> dir(plone.app.event)</h2>
       <ul>
-       <li>Kalenderportlet</li>
+       <li>Neues Kalenderportlet</li>
        <li>Modernisierung der Infrastruktur</li>
       </ul>
 	</section>
@@ -265,12 +290,12 @@ Modernisierung der Infrastruktur: plone.app.testing | plone.app.registry
 	<section class="slide">
     <h2>$ grep -ri TODO</h2>
       <ul>
-        <li>Tests.</li>
-        <li>Migrationspfad.</li>
-        <li>Index Benchmark Analyse.</li>
-        <li>Date/Time Widget.</li>
-        <li>Dokumentation.</li>
-        <li>Submit for review.</li>
+        <li class="delayed">Tests.</li>
+        <li class="delayed">Migrationspfad.</li>
+        <li class="delayed">Index Benchmark Analyse.</li>
+        <li class="delayed">Date/Time Widget.</li>
+        <li class="delayed">Dokumentation.</li>
+        <li class="delayed">Submit for review.</li>
       </ul>
 <!--
 Tests.- Testabdeckung XXX %
@@ -295,11 +320,10 @@ Tests.- Testabdeckung XXX %
 	<section class="slide">
     <h2>>>> import future</h2>
       <ul>
-<li>Abweichende Beginn-/Endzeiten und Texte bei Recurring Events</li>
-<li>Weitere iCalendar Standard Event Typen: Journal, Todo, Alarm</li>
-<li>iCalendar import</li>
-<li>CalDAV schnittstelle</li>
-<li>CardDAV/vCard schnittstelle</li>
+        <li class="delayed">Abweichende Beginn-/Endzeiten und Texte bei Recurring Events</li>
+        <li class="delayed">icalendar Standard Typen: Journal, Todo, Alarm</li>
+        <li class="delayed">CalDAV Schnittstelle - ical Import</li>
+        <li class="delayed">CardDAV/vCard schnittstelle</li>
       </ul>
 	</section>
 </section>
@@ -311,9 +335,14 @@ Tests.- Testabdeckung XXX %
 	</header>
 
 	<section class="slide">
-    <h2>$ git clone git@github.com:collective/plone.app.event.git</h2>
     <h2>$ firefox http://github.com/collective/plone.app.event</h2>
-    <p>Read the README.</p>
+
+    <h2>$ git clone git@github.com:collective/plone.app.event.git</h2>
+    <h2>$ python bootstrap.py; ./bin/buildout</h2>
+    
+    <p>Read the README. Read sources.cfg.</p>
+
+
 	</section>
 </section>
 
@@ -324,14 +353,20 @@ Tests.- Testabdeckung XXX %
 
 	<section class="slide">
     <h2>$ git push</h2>
-    <p>Fork me. Submit Pull requests. Sponsor a sprint.</p>
+    <ul>
+      <li class="delayed">Fork me.</li>
+      <li class="delayed">Submit Pull requests.</li>
+      <li class="delayed">Sponsor a sprint.</li>
+    </ul>
 	</section>
 </section>
 
 
-<section class="slide last">
+<section>
+  <header class="slide">
   <h2>>>> print('Tnx!')</h2>
   <h1>Tnx!</h1>
+  </header>
 </section>
 
 <script src="CSSS/slideshow.js"></script>
