@@ -27,3 +27,4 @@ p { margin: 1em 0 0 0; }
     width:100%;
 }
 #intro .attribution { padding:0.5em 1em; }
+#intro img { position:absolute; bottom:15%; right:5%; }
